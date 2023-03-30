@@ -1,0 +1,167 @@
+<html>
+
+<head>
+    <style>
+        .range-div {
+            position: relative;
+        }
+
+        .slider {
+            margin: 0;
+            padding: 0;
+            width: 600px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #171516;
+        }
+
+
+        /* Bar */
+        .range {
+            -webkit-appearance: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            height: 28px;
+            width: 600px;
+            background: linear-gradient(to right, #f75c84 0%, white 50%, #19f9bd 100%);
+            border-radius: 16px;
+        }
+
+        .range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 70px;
+            height: 28px;
+            background: #D7D7D7;
+            border-radius: 16px;
+        }
+
+        .range-thumb {
+            position: absolute;
+            left: 0px;
+            top: 0;
+            width: 70px;
+            height: 28px;
+            text-align: center;
+            color: black;
+            line-height: 30px;
+            font-size: 15px;
+            pointer-events: none;
+        }
+
+
+        .range-thumb::before {
+            content: attr(data-val) " ";
+        }
+
+
+        .bottom_title {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            justify-content: center;
+            color: white;
+            display: flex;            
+        }
+
+        .header_title {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+
+        .red_title {
+            color: #f75c84;
+        }
+
+        .white_title {
+            color: white;
+        }
+
+        .green_title {
+            color: #19f9bd;
+        }
+        .value_content {
+            padding:0;
+            margin:0;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+        .boxes {
+            display: flex;
+            padding: 20px;
+        }
+
+        .boxes div{
+            padding-right: 20px;
+        }
+    </style>
+</head>
+
+<body style="padding:0;margin:0;">
+    <div class="boxes">
+        <div>
+            Min:
+            <input id="min" type="text">
+        </div>
+        <div>
+            Max:
+            <input id="max" type="text">
+        </div>
+        <div>
+            Current:
+            <input id="current" type="text">
+        </div>
+        <input type="button" id = "ok" value="Measure">
+    </div>
+
+    </div>
+    <div class="slider">
+        <div class="header_title">
+            <p id="red" class="red_title"></p>
+            <p class="white_title">DAY</p>
+            <p id="green" class="green_title"></p>
+        </div>
+        <div class="range-div">
+            <input type="range" class="range" disabled>
+            <span class="range-thumb"></span>
+        </div>
+        <div class="bottom_title"> Range <p class="value_content" id="range_value">0</p>,(<p class="value_content" id="range_percent">0</p>%)</div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        $("#ok").click(function () {
+            var $min = $('#min');
+            var $max = $('#max');
+            var $current = $('#current').val();
+            var $range_value = $max.val() -$min.val();
+            var $range_percent = $range_value / $min.val() * 100;
+            $('.range').prop('min', $min.val());
+            $('.range').prop('max', $max.val());
+            $('.range').prop('value', $current);
+            $('#red').text($min.val());
+            $('#green').text($max.val());
+            $('#range_value').text($range_value);
+            $('#range_percent').text($range_percent);
+            var $thumb = $('.range').next('.range-thumb');
+            var pos = 530 * ($current - $min.val()) / $range_value;
+            $thumb.css({ left: pos }).attr("data-val", parseInt($current));
+        });
+    </script>
+</body>
+
+</html>
+<!--
+    var low = parseInt($(".low").css("left"));
+                        var high = parseInt($(".high").css("left"));
+                        var current = parseInt($(".current").css("left"));
+                        if (current < low) { $(".current").css("left", low + "px"); } if (current > high) {
+                            $(".current").css("left", high + "px");
+                        }
+-->
