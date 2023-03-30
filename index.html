@@ -2,6 +2,15 @@
 
 <head>
     <style>
+        body {
+          background-color: #171516;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding-top: 100px;
+            color: white;
+        }
+
         .range-div {
             position: relative;
         }
@@ -10,18 +19,14 @@
             margin: 0;
             padding: 0;
             width: 600px;
-            height: 100%;
             display: flex;
             flex-direction: column;
-            background-color: #171516;
         }
 
 
         /* Bar */
         .range {
-            -webkit-appearance: none;
-            -webkit-transition: .2s;
-            transition: opacity .2s;
+            appearance: none;
             height: 28px;
             width: 600px;
             background: linear-gradient(to right, #f75c84 0%, white 50%, #19f9bd 100%);
@@ -29,7 +34,6 @@
         }
 
         .range::-webkit-slider-thumb {
-            -webkit-appearance: none;
             appearance: none;
             width: 70px;
             height: 28px;
@@ -52,7 +56,7 @@
 
 
         .range-thumb::before {
-            content: attr(data-val) " ";
+            content: attr(data-val);
         }
 
 
@@ -102,7 +106,8 @@
     </style>
 </head>
 
-<body style="padding:0;margin:0;">
+<body>
+    <h1>Day Stocks</h1>
     <div class="boxes">
         <div>
             Min:
@@ -155,13 +160,4 @@
         });
     </script>
 </body>
-
 </html>
-<!--
-    var low = parseInt($(".low").css("left"));
-                        var high = parseInt($(".high").css("left"));
-                        var current = parseInt($(".current").css("left"));
-                        if (current < low) { $(".current").css("left", low + "px"); } if (current > high) {
-                            $(".current").css("left", high + "px");
-                        }
--->
